@@ -124,9 +124,8 @@ public class logInSceneController {
 			nodes.add(key);
 			tree.insert(key);
 
-			Method display = logInSceneController.class.getDeclaredMethod("displayTree");
 			pane.getChildren().remove(avlPane);
-			display.invoke(this);
+			displayTree();
 			pane.getChildren().add(avlPane);
 
 		}
@@ -143,9 +142,8 @@ public class logInSceneController {
 			nodes.add(key);
 			tree.delete(key);
 
-			Method display = logInSceneController.class.getDeclaredMethod("displayTree");
 			pane.getChildren().remove(avlPane);
-			display.invoke(this);
+			displayTree();
 			pane.getChildren().add(avlPane);
 
 		}
