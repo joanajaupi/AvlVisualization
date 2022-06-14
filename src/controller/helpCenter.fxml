@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="446.0" prefWidth="649.0" style="-fx-background-color: #223e61;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.logInSceneController">
+   <children>
+      <Label layoutX="14.0" layoutY="23.0" text="AVL VISUALISER Help Center" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="14.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is a data structure visualiser. Read more to learn how to get around our program" wrappingWidth="466.1366767883301" />
+      <Text fill="WHITE" layoutX="14.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AVL tree is a self-balancing binary search tree in which each node maintains extra information called a balance factor whose value is either -1, 0 or +1. AVL tree got its name after its inventor Georgy Adelson-Velsky and Landis.In order for it to remain balanced it performs rotations. " wrappingWidth="458.02405738830566" />
+      <Button fx:id="closeButtonHelpCenter" layoutX="553.0" layoutY="20.0" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="27.0" prefWidth="85.0" styleClass="back" text="Close" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="72.0" fitWidth="638.0" layoutX="14.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../application/images/screenshot.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="14.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our Visualiser Performs Every Operation, such as Inserting a node in a tree. deleting a node, searching the AVL tree for a certain element. Also it generates the height and Depth of the desired node. A textfield is there for you to read your wishes as the VISUALISER will make them come true :)" wrappingWidth="466.1366767883302" />
+      <Text fill="WHITE" layoutX="17.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Also it will show a prompt with a list of inorder, preorder or postorsder traversals of the tree. " wrappingWidth="170.55996704101562" />
+      <Text fill="WHITE" layoutX="205.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Our team made sure no duplicate values can be inserted and you would get an alert anytime you try to remove a nonexisting node. " wrappingWidth="238.2135772705078" />
+      <Text fill="WHITE" layoutX="17.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A view of the dashboard in the visualiser Scene" />
+      <Button fx:id="gitRepo" layoutX="284.0" layoutY="325.0" mnemonicParsing="false" onAction="#openGit" prefHeight="27.0" prefWidth="85.0" styleClass="repo" text="GIT REPO" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

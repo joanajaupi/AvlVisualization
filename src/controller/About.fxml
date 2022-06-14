@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="432.0" prefWidth="423.0" style="-fx-background-color: #0E264F;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.logInSceneController">
+<AnchorPane prefHeight="432.0" prefWidth="423.0" style="-fx-background-color: #0E264F;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.logInSceneController">
    <children>
       <ImageView fx:id="jo" fitHeight="70.0" fitWidth="76.0" layoutX="45.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -17,22 +17,22 @@
             <Image url="@../application/images/JonMukaj.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="fab" fitHeight="70.0" fitWidth="80.0" layoutX="305.0" layoutY="52.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="fab" fitHeight="70.0" fitWidth="80.0" layoutX="305.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../application/images/FabioMarku.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="kev" fitHeight="81.0" fitWidth="79.0" layoutX="40.0" layoutY="177.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="kev" fitHeight="81.0" fitWidth="79.0" layoutX="40.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../application/images/kevinTenolli.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="e" fitHeight="79.0" fitWidth="79.0" layoutX="167.0" layoutY="177.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="e" fitHeight="79.0" fitWidth="79.0" layoutX="167.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../application/images/EnestMethasani.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="k" fitHeight="79.0" fitWidth="79.0" layoutX="296.0" layoutY="177.0"  pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="k" fitHeight="79.0" fitWidth="79.0" layoutX="296.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../application/images/KristiRrapaj.png" />
          </image>
@@ -47,7 +47,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Text>
-      <Button layoutX="275.0" layoutY="378.0" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="1.0" prefWidth="129.0" style="-fx-background-color: #ba1717;" text="Back" textFill="WHITE">
+      <Button layoutX="275.0" layoutY="378.0" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="1.0" prefWidth="129.0" styleClass="back" text="Back" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -55,7 +55,7 @@
       <Hyperlink fx:id="joana" layoutX="40.0" layoutY="51.0" onAction="#openLinkedin" prefHeight="70.0" prefWidth="79.0" />
       <Hyperlink fx:id="jon" layoutX="172.0" layoutY="52.0" onAction="#openLinkedin" prefHeight="70.0" prefWidth="79.0" />
       <Hyperlink fx:id="fabio" layoutX="301.0" layoutY="51.0" onAction="#openLinkedin" prefHeight="70.0" prefWidth="79.0" />
-      <Hyperlink fx:id="joanaLink111" layoutX="41.0" layoutY="177.0" onAction="#openLinkedin" prefHeight="85.0" prefWidth="79.0" />
+      <Hyperlink fx:id="kevin" layoutX="41.0" layoutY="177.0" onAction="#openLinkedin" prefHeight="85.0" prefWidth="79.0" />
       <Hyperlink fx:id="enest" layoutX="167.0" layoutY="177.0" onAction="#openLinkedin" prefHeight="85.0" prefWidth="79.0" />
       <Hyperlink fx:id="kristi" layoutX="296.0" layoutY="177.0" onAction="#openLinkedin" prefHeight="85.0" prefWidth="79.0" />
    </children>
