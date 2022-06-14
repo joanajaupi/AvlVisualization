@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -22,6 +23,9 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
+            primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("images/design.png")));
+            primaryStage.setTitle("AVL VISUALISER");
+            primaryStage.setResizable(false);
         } catch (Exception e) {
             e.printStackTrace();
         }

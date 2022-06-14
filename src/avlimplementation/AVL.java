@@ -201,12 +201,61 @@ public class AVL<T extends Comparable<T>> {
         inorder(this.root);
     }
 
-    private void inorder(AvlNode<T> treeNode) {
-        if (treeNode == null) return;
-        inorder(treeNode.getLeft());
-        System.out.print(treeNode.getValue() + " ");
-        inorder(treeNode.getRight());
+
+    public String inorderText() {
+        return inorder(this.root);
     }
+
+    private String inorder(AvlNode<T> treeNode) {
+        if (treeNode == null) return "";
+        String t1 = inorder(treeNode.getLeft());
+        String t2 = inorder(treeNode.getRight());
+        if(treeNode.getLeft() == null && treeNode.getRight() ==null)
+            return treeNode.value.toString();
+        else if(treeNode.getLeft() == null)
+            return treeNode.value.toString() +", "+t2;
+        else if(treeNode.getRight() == null)
+            return t1 + ", "+ treeNode.value.toString();
+        else
+            return t1 + ", "+ treeNode.value.toString() + ", " + t2;
+    }
+
+    public String preorderText() {
+        return preorder(this.root);
+    }
+
+    private String preorder(AvlNode<T> treeNode) {
+        if (treeNode == null) return "";
+        String t1 = preorder(treeNode.getLeft());
+        String t2 = preorder(treeNode.getRight());
+        if(treeNode.getLeft() == null && treeNode.getRight() ==null)
+            return treeNode.value.toString();
+        else if(treeNode.getLeft() == null)
+            return treeNode.value.toString() +", "+t2;
+        else if(treeNode.getRight() == null)
+            return treeNode.value.toString() + ", "+ t1 ;
+        else
+            return treeNode.value.toString() + ", "+ t1 + ", " + t2;
+    }
+
+    public String postorderText() {
+        return postorder(this.root);
+    }
+
+    private String postorder(AvlNode<T> treeNode) {
+        if (treeNode == null) return "";
+        String t1 = postorder(treeNode.getLeft());
+        String t2 = postorder(treeNode.getRight());
+        if(treeNode.getLeft() == null && treeNode.getRight() ==null)
+            return treeNode.value.toString();
+        else if(treeNode.getLeft() == null)
+            return t2 +", "+treeNode.value.toString();
+        else if(treeNode.getRight() == null)
+            return t1 + ", "+ treeNode.value.toString() ;
+        else
+            return   t1 + ", " + t2 + ", " + treeNode.value.toString();
+    }
+
 
     /*toString() of the avl tree*/
 

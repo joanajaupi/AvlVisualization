@@ -5,31 +5,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="416.0" style="-fx-background-color: #0e264f;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.logInSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="416.0" style="-fx-background-color: #0e264f;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.logInSceneController">
    <children>
       <Label layoutX="84.0" layoutY="212.0" prefHeight="71.0" prefWidth="274.0" text="AVL VISUALISER" textFill="#9ba7ff">
          <font>
             <Font name="Arial Bold" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="getStarted" layoutX="118.0" layoutY="283.0" mnemonicParsing="false" onAction="#getStartedPressed" prefHeight="29.0" prefWidth="191.0" style="-fx-background-color: #5a76a6;" text="Get Started" textFill="WHITE">
+      <Button fx:id="getStarted" layoutX="118.0" layoutY="283.0" mnemonicParsing="false" onAction="#getStartedPressed" prefHeight="29.0" prefWidth="191.0" styleClass="buttons" text="Get Started" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="about" layoutX="118.0" layoutY="356.0" mnemonicParsing="false" onAction="#aboutPressed" prefHeight="29.0" prefWidth="191.0" style="-fx-background-color: #5a76a6;" text="About" textFill="WHITE">
+      <Button fx:id="about" layoutX="118.0" layoutY="361.0" mnemonicParsing="false" onAction="#aboutPressed" prefHeight="29.0" prefWidth="191.0" styleClass="buttons" text="About" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="howToUse" layoutX="118.0" layoutY="324.0" mnemonicParsing="false" onAction="#howToUsePressed" prefHeight="25.0" prefWidth="191.0" style="-fx-background-color: #5a76a6;" text="How To Use" textFill="WHITE">
+      <Button fx:id="howToUse" layoutX="118.0" layoutY="324.0" mnemonicParsing="false" onAction="#howToUsePressed" prefHeight="25.0" prefWidth="191.0" styleClass="buttons" text="How To Use" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>
       </Button>
       <ImageView fitHeight="190.0" fitWidth="239.0" layoutX="119.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Design.png"/>
+            <Image url="@images/Design.png" />
          </image>
       </ImageView>
    </children>

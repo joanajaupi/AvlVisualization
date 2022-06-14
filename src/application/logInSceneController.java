@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -43,6 +44,8 @@ public class logInSceneController {
     //avlScene buttons
     @FXML
     private TextField valueField;
+    @FXML
+    public Label label;
     @FXML
     private Button addButton;
     @FXML
@@ -89,7 +92,6 @@ public class logInSceneController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-
         stage.show();
     }
 
@@ -137,6 +139,7 @@ public class logInSceneController {
 
     @FXML
     void addButton(ActionEvent event)  {
+        label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to insert!", ButtonType.OK);
             alert.getDialogPane().setMinHeight(80);
@@ -144,12 +147,18 @@ public class logInSceneController {
         }
         else {
             int key = Integer.parseInt(valueField.getText());
-            if(tree.search(tree.getRoot(),key) != null)
-                System.out.println("No duplicate vertex allowed!");
+            if(tree.search(tree.getRoot(),key) != null) {
+                label.setText("No duplicate vertex allowed!");
+                label.setTextFill(Color.RED);
+                label.setVisible(true);
+            }
             else {
                 nodes.add(key);
                 tree.insert(key);
                 pane.getChildren().remove(avlPane);
+                label.setText("Inserted!");
+                label.setTextFill(Color.valueOf("#15C633"));
+                label.setVisible(true);
                 displayTree();
                 pane.getChildren().add(avlPane);
             }
@@ -159,18 +168,25 @@ public class logInSceneController {
 
     @FXML
     void deleteButton(ActionEvent event)  {
+        label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to delete!", ButtonType.OK);
             alert.getDialogPane().setMinHeight(80);
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
-            if(tree.search(tree.getRoot(),key) == null)
-                System.out.println("Node " + key + " is not in the AVL!");
+            if(tree.search(tree.getRoot(),key) == null) {
+                label.setText("Node " + key + " is not in the AVL!");
+                label.setTextFill(Color.RED);
+                label.setVisible(true);
+            }
             else {
                 nodes.add(key);
                 tree.delete(key);
                 pane.getChildren().remove(avlPane);
+                label.setText("Deleted!");
+                label.setTextFill(Color.valueOf("#15C633"));
+                label.setVisible(true);
                 displayTree();
                 pane.getChildren().add(avlPane);
             }
@@ -180,15 +196,26 @@ public class logInSceneController {
 
     @FXML
     void searchButton(ActionEvent event)  {
+        label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to search!", ButtonType.OK);
             alert.getDialogPane().setMinHeight(80);
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
-            pane.getChildren().remove(avlPane);
-            displayTreeSearch(key);
-            pane.getChildren().add(avlPane);
+            if(tree.search(tree.getRoot(),key) == null) {
+                label.setText("Node " + key + " is not in the AVL!");
+                label.setTextFill(Color.RED);
+                label.setVisible(true);
+            }
+            else {
+                pane.getChildren().remove(avlPane);
+                displayTreeSearch(key);
+                label.setText("Found!");
+                label.setTextFill(Color.valueOf("#15C633"));
+                label.setVisible(true);
+                pane.getChildren().add(avlPane);
+            }
             valueField.setText("");
         }
     }
@@ -196,14 +223,18 @@ public class logInSceneController {
 
     @FXML
     void heightButton(ActionEvent event)  {
+        label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to get height!", ButtonType.OK);
             alert.getDialogPane().setMinHeight(80);
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
-            if(tree.search(tree.getRoot(),key) == null)
-                System.out.println("Node " + key + " is not in the AVL!");
+            if(tree.search(tree.getRoot(),key) == null) {
+                label.setText("Node " + key + " is not in the AVL!");
+                label.setTextFill(Color.RED);
+                label.setVisible(true);
+            }
             else {
                 pane.getChildren().remove(avlPane);
                 displayTreeHeight(key);
@@ -215,14 +246,18 @@ public class logInSceneController {
 
     @FXML
     void depthButton(ActionEvent event)  {
+        label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to get depth!", ButtonType.OK);
             alert.getDialogPane().setMinHeight(80);
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
-            if(tree.search(tree.getRoot(),key) == null)
-                System.out.println("Node " + key + " is not in the AVL!");
+            if(tree.search(tree.getRoot(),key) == null) {
+                label.setText("Node " + key + " is not in the AVL!");
+                label.setTextFill(Color.RED);
+                label.setVisible(true);
+            }
             else {
                 pane.getChildren().remove(avlPane);
                 displayTreeDepth(key);
@@ -234,6 +269,7 @@ public class logInSceneController {
 
     @FXML
     void backButton(ActionEvent event) throws IOException {
+        label.setVisible(false);
         tree = null;
         nodes = null;
         root = FXMLLoader.load(getClass().getResource("logInScene.fxml"));
@@ -329,9 +365,7 @@ public class logInSceneController {
         circle.setFill(color);
         if(root.getValue().compareTo(target) == 0){
             circle.setFill(Color.GREEN);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Height of highlighted node is:  " + root.getHeight() , ButtonType.OK);
-            alert.getDialogPane().setMinHeight(80);
-            alert.show();
+            alertShow("Height of highlighted node is: ",Integer.toString(root.getHeight()));
         }
         Text t = new Text(x - 5, y + 4, root.value + "");
         t.setFill(Color.WHITE);
@@ -353,13 +387,42 @@ public class logInSceneController {
         circle.setFill(color);
         if(root.getValue().compareTo(target) == 0){
             circle.setFill(Color.BLUE);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Depth of highlighted node is:  " + tree.findDepth(tree.getRoot(), target) , ButtonType.OK);
+            alertShow("Depth of highlighted node is: ",Integer.toString(tree.findDepth(tree.getRoot(), target)));
+            /*Alert alert = new Alert(Alert.AlertType.INFORMATION, "Depth of highlighted node is:  " + tree.findDepth(tree.getRoot(), target) , ButtonType.OK);
             alert.getDialogPane().setMinHeight(80);
-            alert.show();
+            alert.show();*/
         }
         Text t = new Text(x - 5, y + 4, root.value + "");
         t.setFill(Color.WHITE);
         avlPane.getChildren().addAll(circle, t);
+    }
+
+    private void alertShow(String type, String message)
+    {
+        Alert alert;
+        if(message.equals(""))
+            alert = new Alert(Alert.AlertType.INFORMATION, "Tree is Empty!", ButtonType.OK);
+        else
+            alert = new Alert(Alert.AlertType.INFORMATION, type + message, ButtonType.OK);
+        alert.getDialogPane().setMinHeight(80);
+        alert.setTitle("PROMPT");
+        alert.show();
+    }
+
+    @FXML
+    void inButtonPressed(ActionEvent event) throws IOException{
+        label.setVisible(false);
+        alertShow("Inorder Output: ", tree.inorderText());
+    }
+    @FXML
+    void preButtonPressed(ActionEvent event) throws IOException{
+        label.setVisible(false);
+        alertShow("Preorder Output: ", tree.preorderText());
+    }
+    @FXML
+    void postButtonPressed(ActionEvent event) throws IOException{
+        label.setVisible(false);
+        alertShow("Postorder Output: ", tree.postorderText());
     }
 
 }
