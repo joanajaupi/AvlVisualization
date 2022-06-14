@@ -27,8 +27,10 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import model.CustomException;
 
-public class logInSceneController {
+public class
+logInSceneController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -112,7 +114,7 @@ public class logInSceneController {
     }
 
     @FXML
-    void addButton(ActionEvent event) {
+    void addButton(ActionEvent event){
         label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to insert!", ButtonType.OK);
@@ -123,21 +125,27 @@ public class logInSceneController {
             alert.setHeaderText("Insertion");
             alert.show();
         } else {
-            int key = Integer.parseInt(valueField.getText());
-            if (tree.search(tree.getRoot(), key) != null) {
-                label.setText("No duplicate node allowed!");
-                label.setTextFill(Color.RED);
-                label.setVisible(true);
-            } else {
-                nodes.add(key);
-                tree.insert(key);
-                pane.getChildren().remove(avlPane);
-                label.setText("Inserted!");
-                label.setTextFill(Color.valueOf("#15C633"));
-                label.setVisible(true);
-                displayTree();
-                pane.getChildren().add(avlPane);
+            try {
+                int key = Integer.parseInt(valueField.getText());
+                if (tree.search(tree.getRoot(), key) != null) {
+                    label.setText("No duplicate node allowed!");
+                    label.setTextFill(Color.RED);
+                    label.setVisible(true);
+                } else {
+                    nodes.add(key);
+                    tree.insert(key);
+                    pane.getChildren().remove(avlPane);
+                    label.setText("Inserted!");
+                    label.setTextFill(Color.valueOf("#15C633"));
+                    label.setVisible(true);
+                    displayTree();
+                    pane.getChildren().add(avlPane);
+                }
             }
+            catch (Exception ex) {
+                new CustomException("Enter integer for insertion!");
+            }
+
             valueField.setText("");
         }
     }
@@ -154,20 +162,25 @@ public class logInSceneController {
             alert.setHeaderText("Deletion");
             alert.show();
         } else {
-            int key = Integer.parseInt(valueField.getText());
-            if (tree.search(tree.getRoot(), key) == null) {
-                label.setText("Node " + key + " is not in the AVL!");
-                label.setTextFill(Color.RED);
-                label.setVisible(true);
-            } else {
-                nodes.add(key);
-                tree.delete(key);
-                pane.getChildren().remove(avlPane);
-                label.setText("Deleted!");
-                label.setTextFill(Color.valueOf("#15C633"));
-                label.setVisible(true);
-                displayTree();
-                pane.getChildren().add(avlPane);
+            try {
+                int key = Integer.parseInt(valueField.getText());
+                if (tree.search(tree.getRoot(), key) == null) {
+                    label.setText("Node " + key + " is not in the AVL!");
+                    label.setTextFill(Color.RED);
+                    label.setVisible(true);
+                } else {
+                    nodes.add(key);
+                    tree.delete(key);
+                    pane.getChildren().remove(avlPane);
+                    label.setText("Deleted!");
+                    label.setTextFill(Color.valueOf("#15C633"));
+                    label.setVisible(true);
+                    displayTree();
+                    pane.getChildren().add(avlPane);
+                }
+            }
+            catch (Exception ex){
+                new CustomException("Enter integer for deletion!");
             }
             valueField.setText("");
         }
@@ -185,18 +198,23 @@ public class logInSceneController {
             alert.setHeaderText("Searching");
             alert.show();
         } else {
-            int key = Integer.parseInt(valueField.getText());
-            if (tree.search(tree.getRoot(), key) == null) {
-                label.setText("Node " + key + " is not in the AVL!");
-                label.setTextFill(Color.RED);
-                label.setVisible(true);
-            } else {
-                pane.getChildren().remove(avlPane);
-                displayTreeSearch(key);
-                label.setText("Found!");
-                label.setTextFill(Color.valueOf("#15C633"));
-                label.setVisible(true);
-                pane.getChildren().add(avlPane);
+            try {
+                int key = Integer.parseInt(valueField.getText());
+                if (tree.search(tree.getRoot(), key) == null) {
+                    label.setText("Node " + key + " is not in the AVL!");
+                    label.setTextFill(Color.RED);
+                    label.setVisible(true);
+                } else {
+                    pane.getChildren().remove(avlPane);
+                    displayTreeSearch(key);
+                    label.setText("Found!");
+                    label.setTextFill(Color.valueOf("#15C633"));
+                    label.setVisible(true);
+                    pane.getChildren().add(avlPane);
+                }
+            }
+            catch (Exception ex) {
+                new CustomException("Enter integer for search!");
             }
             valueField.setText("");
         }
@@ -215,15 +233,20 @@ public class logInSceneController {
             alert.setTitle("PROMPT");
             alert.show();
         } else {
-            int key = Integer.parseInt(valueField.getText());
-            if (tree.search(tree.getRoot(), key) == null) {
-                label.setText("Node " + key + " is not in the AVL!");
-                label.setTextFill(Color.RED);
-                label.setVisible(true);
-            } else {
-                pane.getChildren().remove(avlPane);
-                displayTreeHeight(key);
-                pane.getChildren().add(avlPane);
+            try {
+                int key = Integer.parseInt(valueField.getText());
+                if (tree.search(tree.getRoot(), key) == null) {
+                    label.setText("Node " + key + " is not in the AVL!");
+                    label.setTextFill(Color.RED);
+                    label.setVisible(true);
+                } else {
+                    pane.getChildren().remove(avlPane);
+                    displayTreeHeight(key);
+                    pane.getChildren().add(avlPane);
+                }
+            }
+            catch (Exception ex) {
+                new CustomException("Enter integer for finding height!");
             }
             valueField.setText("");
         }
@@ -241,15 +264,20 @@ public class logInSceneController {
             alert.setHeaderText("Depth");
             alert.show();
         } else {
-            int key = Integer.parseInt(valueField.getText());
-            if (tree.search(tree.getRoot(), key) == null) {
-                label.setText("Node " + key + " is not in the AVL!");
-                label.setTextFill(Color.RED);
-                label.setVisible(true);
-            } else {
-                pane.getChildren().remove(avlPane);
-                displayTreeDepth(key);
-                pane.getChildren().add(avlPane);
+            try {
+                int key = Integer.parseInt(valueField.getText());
+                if (tree.search(tree.getRoot(), key) == null) {
+                    label.setText("Node " + key + " is not in the AVL!");
+                    label.setTextFill(Color.RED);
+                    label.setVisible(true);
+                } else {
+                    pane.getChildren().remove(avlPane);
+                    displayTreeDepth(key);
+                    pane.getChildren().add(avlPane);
+                }
+            }
+            catch (Exception ex) {
+                new CustomException("Enter integer for finding depth!");
             }
             valueField.setText("");
         }
@@ -399,18 +427,21 @@ public class logInSceneController {
     @FXML
     void inButtonPressed(ActionEvent event) throws IOException {
         label.setVisible(false);
+        valueField.setText("");
         alertShow("Inorder Output: ", tree.inorderText());
     }
 
     @FXML
     void preButtonPressed(ActionEvent event) throws IOException {
         label.setVisible(false);
+        valueField.setText("");
         alertShow("Preorder Output: ", tree.preorderText());
     }
 
     @FXML
     void postButtonPressed(ActionEvent event) throws IOException {
         label.setVisible(false);
+        valueField.setText("");
         alertShow("Postorder Output: ", tree.postorderText());
     }
 
