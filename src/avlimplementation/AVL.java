@@ -1,19 +1,53 @@
 package avlimplementation;
+
 public class AVL<T extends Comparable<T>> {
     private AvlNode<T> root;
 
-    public AvlNode<T> getroot(){
+    public AvlNode<T> getRoot() {
         return this.root;
+    }
+
+    public AvlNode<T> search(AvlNode<T> root, T target)
+    {
+        // root is null or value present at root
+        if (root==null || root.getValue().compareTo(target) == 0)
+            return root;
+
+        // target is greater than root's value
+        else if (root.getValue().compareTo(target) < 0)
+            return search(root.getRight(), target);
+
+        // target is smaller than root's value
+        else
+            return search(root.getLeft(), target);
     }
 
     private int getHeight(AvlNode<T> node) {
         if (node == null) return -1;
         return node.getHeight();
     }
+
+    public int findDepth(AvlNode<T> root, T target)
+    {
+        if (root == null)
+            return -1;
+
+        int distance = -1;
+
+        // Check if x is current node=
+        if (root.getValue().compareTo(target) == 0 ||
+                (distance = findDepth(root.getLeft(), target)) >= 0 ||  //check if present in left subtree
+                (distance = findDepth(root.getRight(), target)) >= 0)  //check if present in right subtree
+            return distance + 1;  //return depth
+
+        return distance;
+    }
+
     private int getBalance(AvlNode<T> node) {
         if (node == null) return -1;
         return getHeight(node.getLeft()) - getHeight(node.getRight());
     }
+
     private AvlNode<T> rightRotate(AvlNode<T> node) {
         // right rotation of a node
         AvlNode<T> parent = node.getParent();
@@ -38,6 +72,7 @@ public class AVL<T extends Comparable<T>> {
         leftChild.setHeight(1 + Math.max(getHeight(leftChild.getLeft()), getHeight(leftChild.getRight())));
         return leftChild;
     }
+
     private AvlNode<T> leftRotate(AvlNode<T> node) {
         // left rotation of a node
         AvlNode<T> parent = node.getParent();
@@ -60,6 +95,7 @@ public class AVL<T extends Comparable<T>> {
         rightChild.setHeight(1 + Math.max(getHeight(rightChild.getLeft()), getHeight(rightChild.getRight())));
         return rightChild;
     }
+
     public void insert(T key) {
         this.root = insert(key, root);
     }
@@ -82,7 +118,7 @@ public class AVL<T extends Comparable<T>> {
                 return rightRotate(subRoot);
             }
         } // left heavy
-        else if (balanceFactor < - 1) {
+        else if (balanceFactor < -1) {
             int res = subRoot.getRight().getValue().compareTo(key);
             if (res > 0) {
                 subRoot.setRight(rightRotate(subRoot.getRight()));
@@ -96,51 +132,43 @@ public class AVL<T extends Comparable<T>> {
         this.root = delete(key, root);
     }
 
-    private AvlNode<T> minValueNode(AvlNode<T> node)
-    {
+    private AvlNode<T> minValueNode(AvlNode<T> node) {
         AvlNode<T> temp;
-        for(temp=node; temp.getLeft() != null; temp = temp.getLeft());
+        for (temp = node; temp.getLeft() != null; temp = temp.getLeft()) ;
 
         return temp;
     }
 
-    private AvlNode<T> delete(T key, AvlNode<T> subRoot)
-    {
+    private AvlNode<T> delete(T key, AvlNode<T> subRoot) {
         if (subRoot == null)
             return subRoot;
 
         else if (subRoot.getValue().compareTo(key) > 0)
-            subRoot.setLeft(delete(key,subRoot.getLeft()));
+            subRoot.setLeft(delete(key, subRoot.getLeft()));
 
         else if (subRoot.getValue().compareTo(key) < 0)
-            subRoot.setRight(delete(key,subRoot.getRight()));
+            subRoot.setRight(delete(key, subRoot.getRight()));
 
-        else
-        {
-            if ((subRoot.getLeft() == null) || (subRoot.getRight() == null))
-            {
+        else {
+            if ((subRoot.getLeft() == null) || (subRoot.getRight() == null)) {
                 AvlNode<T> temp = null;
                 if (temp == subRoot.getLeft())
                     temp = subRoot.getRight();
                 else
                     temp = subRoot.getLeft();
 
-                if (temp == null)
-                {
+                if (temp == null) {
                     temp = subRoot;
                     subRoot = null;
-                }
-                else
+                } else
                     subRoot = temp;
-            }
-            else
-            {
+            } else {
 
                 AvlNode<T> temp = minValueNode(subRoot.getRight());
 
                 subRoot.setValue(temp.getValue());
 
-                subRoot.setRight(delete(temp.getValue(),subRoot.getRight()));
+                subRoot.setRight(delete(temp.getValue(), subRoot.getRight()));
             }
         }
 
@@ -153,8 +181,7 @@ public class AVL<T extends Comparable<T>> {
         if (balance > 1 && getBalance(subRoot.getLeft()) >= 0)
             return rightRotate(subRoot);
 
-        if (balance > 1 && getBalance(subRoot.getLeft()) < 0)
-        {
+        if (balance > 1 && getBalance(subRoot.getLeft()) < 0) {
             subRoot.setLeft(leftRotate(subRoot.getLeft()));
             return rightRotate(subRoot);
         }
@@ -162,8 +189,7 @@ public class AVL<T extends Comparable<T>> {
         if (balance < -1 && getBalance(subRoot.getRight()) <= 0)
             return leftRotate(subRoot);
 
-        if (balance < -1 && getBalance(subRoot.getRight()) > 0)
-        {
+        if (balance < -1 && getBalance(subRoot.getRight()) > 0) {
             subRoot.setRight(rightRotate(subRoot.getRight()));
             return leftRotate(subRoot);
         }

@@ -2,11 +2,7 @@ package avlVisualiser;
 
 import avlimplementation.AVL;
 import avlimplementation.AvlNode;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -32,8 +28,8 @@ public class avlPane extends Pane{
 
      public void displayTree(){
         this.getChildren().clear();
-        if(tree.getroot() != null){
-            displayTree(tree.getroot(), getWidth() / 2, vGap, getWidth() / 4, Color.web("#0e264f"));
+        if(tree.getRoot() != null){
+            displayTree(tree.getRoot(), getWidth() / 2, vGap, getWidth() / 4, Color.web("#0e264f"));
         }
     }
 

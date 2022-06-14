@@ -10,9 +10,9 @@
          <children>
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButton" style="-fx-background-color: #5a76a6;" text="Insert" textFill="WHITE" />
             <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButton" style="-fx-background-color: #5a76a6;" text="Delete" textFill="WHITE" />
-            <Button fx:id="searchButton" mnemonicParsing="false" style="-fx-background-color: #5a76a6;" text="Search" textFill="WHITE" />
-            <Button fx:id="heightButton" mnemonicParsing="false" style="-fx-background-color: #5a76a6;" text="Height" textFill="WHITE" />
-            <Button fx:id="depthButton" mnemonicParsing="false" style="-fx-background-color: #5a76a6;" text="Depth" textFill="WHITE" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButton" style="-fx-background-color: #5a76a6;" text="Search" textFill="WHITE" />
+            <Button fx:id="heightButton" mnemonicParsing="false" onAction="#heightButton" style="-fx-background-color: #5a76a6;" text="Height" textFill="WHITE" />
+            <Button fx:id="depthButton" mnemonicParsing="false" onAction="#depthButton" style="-fx-background-color: #5a76a6;" text="Depth" textFill="WHITE" />
             <Button fx:id="inButton" mnemonicParsing="false" style="-fx-background-color: #5a76a6;" text="InOrder" textFill="WHITE" />
             <Button fx:id="preButton" mnemonicParsing="false" style="-fx-background-color: #5a76a6;" text="PreOrder" textFill="WHITE" />
             <Button fx:id="postButton" mnemonicParsing="false" style="-fx-background-color: #5a76a6;" text="PostOrder" textFill="WHITE" />

@@ -1,12 +1,11 @@
 package application;
 
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.net.URI;
 import java.util.ArrayList;
 
-import avlVisualiser.Visualiser;
-import avlVisualiser.avlPane;
 import avlimplementation.AVL;
 import avlimplementation.AvlNode;
 import javafx.event.ActionEvent;
@@ -14,84 +13,86 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+
+import javax.swing.text.html.ImageView;
+
 public class logInSceneController {
-	 private Stage stage;
-	 private Scene scene;
-	 private Parent root;
-	//Main menu buttons
-	 @FXML
-	    private Button about;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+    //Main menu buttons
+    @FXML
+    private Button about;
 
-	    @FXML
-	    private Button getStarted;
+    @FXML
+    private Button getStarted;
 
-	    @FXML
-	    private Button howToUse;
+    @FXML
+    private Button howToUse;
 
-	//avlScene buttons
-		@FXML
-		private TextField valueField;
-		@FXML
-		private Button addButton;
-		@FXML
-		private Button deleteButton;
-	@FXML
-	private Button searchButton;
-	@FXML
-	private Button heightButton;
-	@FXML
-	private Button depthButton;
-	@FXML
-	private Button inButton;
-	@FXML
-	private Button preButton;
-	@FXML
-	private Button postButton;
-	@FXML
-	private Button backButton;
+    //avlScene buttons
+    @FXML
+    private TextField valueField;
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private Button heightButton;
+    @FXML
+    private Button depthButton;
+    @FXML
+    private Button inButton;
+    @FXML
+    private Button preButton;
+    @FXML
+    private Button postButton;
+    @FXML
+    private Button backButton;
 
 
-//Avltree
-	private AVL<Integer> tree = new AVL<>();
-	//private avlPane view = new avlPane(tree);
-	private static ArrayList<Integer> nodes = new ArrayList<>();
-	@FXML
-	Pane avlPane = new Pane();
-	@FXML
-	Pane pane;
-	private double radius = 15;
-	private double vGap = 50;
+    //Avltree
+    private AVL<Integer> tree = new AVL<>();
+    //private avlPane view = new avlPane(tree);
+    private ArrayList<Integer> nodes = new ArrayList<>();
+    @FXML
+    Pane avlPane = new Pane();
+    @FXML
+    Pane pane;
+    private double radius = 17;
+    private double vGap = 50;
+
     @FXML
     void aboutPressed(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("scene1.fxml"));
-    	  stage = (Stage) about.getScene().getWindow();
-    	  scene = new Scene(root);
-    	  stage.setScene(scene);
-    	  stage.show();
+        root = FXMLLoader.load(getClass().getResource("About.fxml"));
+        stage = (Stage) about.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
     void getStartedPressed(ActionEvent event) throws Exception {
-		root = FXMLLoader.load(getClass().getResource("avlScene.fxml"));
-   	  stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-   	  scene = new Scene(root);
-   	  stage.setScene(scene);
-		 //new Visualiser().start();
+        root = FXMLLoader.load(getClass().getResource("avlScene.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
 
-   	  stage.show();
+        stage.show();
     }
+
 
     @FXML
     void howToUsePressed(ActionEvent event) throws IOException {
@@ -106,92 +107,260 @@ public class logInSceneController {
     @FXML
     void backButtonPressed(ActionEvent event) throws IOException {
 
-    	root = FXMLLoader.load(getClass().getResource("logInScene.fxml"));
-     	  stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-     	  scene = new Scene(root);
-     	  stage.setScene(scene);
-     	  stage.show();
+        root = FXMLLoader.load(getClass().getResource("logInScene.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
-	@FXML
-	void addButton(ActionEvent event) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-		if (valueField.getText().length() == 0) {
-			Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to insert!", ButtonType.OK);
-			alert.getDialogPane().setMinHeight(80);
-			alert.show();
-		} else {
-			int key = Integer.parseInt(valueField.getText());
-			nodes.add(key);
-			tree.insert(key);
 
-			pane.getChildren().remove(avlPane);
-			displayTree();
-			pane.getChildren().add(avlPane);
+    @FXML
+    Hyperlink jon;
+    @FXML
+    void openLinkedin(ActionEvent event) throws Exception {
+        final Node source = (Node) event.getSource();
+        if(source.getId().matches("joana")) {
+            Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/joana-jaupi-a88477219/"));
+        }
+        else if (source.getId().matches("jon"))
+            Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/jon-mukaj/"));
+        else if (source.getId().matches("fabio"))
+            Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/fabiomarku/"));
+        else if (source.getId().matches("kevin"))
+            Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/kevin-tenolli-59357415a/"));
+        else if (source.getId().matches("enest"))
+            Desktop.getDesktop().browse(new URI("https://github.com/JonMukaj/AvlVisualization")); //dummy
+        else if (source.getId().matches("kristi"))
+            Desktop.getDesktop().browse(new URI("https://github.com/JonMukaj/AvlVisualization")); //dummy
+    }
 
-		}
-	}
+    @FXML
+    void addButton(ActionEvent event)  {
+        if (valueField.getText().length() == 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to insert!", ButtonType.OK);
+            alert.getDialogPane().setMinHeight(80);
+            alert.show();
+        }
+        else {
+            int key = Integer.parseInt(valueField.getText());
+            if(tree.search(tree.getRoot(),key) != null)
+                System.out.println("No duplicate vertex allowed!");
+            else {
+                nodes.add(key);
+                tree.insert(key);
+                pane.getChildren().remove(avlPane);
+                displayTree();
+                pane.getChildren().add(avlPane);
+            }
+            valueField.setText("");
+        }
+    }
 
-	@FXML
-	void deleteButton(ActionEvent event) throws IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-		if (valueField.getText().length() == 0) {
-			Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to delete!", ButtonType.OK);
-			alert.getDialogPane().setMinHeight(80);
-			alert.show();
-		} else {
-			int key = Integer.parseInt(valueField.getText());
-			nodes.add(key);
-			tree.delete(key);
+    @FXML
+    void deleteButton(ActionEvent event)  {
+        if (valueField.getText().length() == 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to delete!", ButtonType.OK);
+            alert.getDialogPane().setMinHeight(80);
+            alert.show();
+        } else {
+            int key = Integer.parseInt(valueField.getText());
+            if(tree.search(tree.getRoot(),key) == null)
+                System.out.println("Node " + key + " is not in the AVL!");
+            else {
+                nodes.add(key);
+                tree.delete(key);
+                pane.getChildren().remove(avlPane);
+                displayTree();
+                pane.getChildren().add(avlPane);
+            }
+            valueField.setText("");
+        }
+    }
 
-			pane.getChildren().remove(avlPane);
-			displayTree();
-			pane.getChildren().add(avlPane);
-
-		}
-	}
-
-
-	@FXML
-	void backButton(ActionEvent event) throws IOException {
-		tree = null;
-		nodes = null;
-		root = FXMLLoader.load(getClass().getResource("logInScene.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-
-	}
-
-	@FXML
-	public void displayTree(){
-		avlPane.getChildren().clear();
-		if(tree.getroot() != null){
-			displayTree(tree.getroot(), avlPane.getWidth() / 2, vGap, avlPane.getWidth() / 4, Color.web("#0e264f"));
-		}
-	}
-
-	@FXML
-	protected void displayTree(AvlNode<Integer> root, double x, double y, double hGap, Color color){
-		if(root.getLeft() != null){
-			avlPane.getChildren().add(new Line(x - hGap, y + vGap, x, y));
-			displayTree(root.getLeft(), x - hGap, y + vGap, hGap / 2,color);
-		}
-
-		if (root.getRight() != null){
-			avlPane.getChildren().add(new Line(x + hGap, y + vGap, x, y));
-			displayTree(root.getRight(), x + hGap, y + vGap, hGap / 2, color);
-		}
-
-		Circle circle = new Circle(x, y, radius);
-		circle.setFill(color);
-		//circle.setStroke(Color.BLACK);
-		Text t = new Text(x - 4, y + 4, root.value + "");
-		t.setFill(Color.WHITE);
-		avlPane.getChildren().addAll(circle, t);
-	}
+    @FXML
+    void searchButton(ActionEvent event)  {
+        if (valueField.getText().length() == 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to search!", ButtonType.OK);
+            alert.getDialogPane().setMinHeight(80);
+            alert.show();
+        } else {
+            int key = Integer.parseInt(valueField.getText());
+            pane.getChildren().remove(avlPane);
+            displayTreeSearch(key);
+            pane.getChildren().add(avlPane);
+            valueField.setText("");
+        }
+    }
 
 
+    @FXML
+    void heightButton(ActionEvent event)  {
+        if (valueField.getText().length() == 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to get height!", ButtonType.OK);
+            alert.getDialogPane().setMinHeight(80);
+            alert.show();
+        } else {
+            int key = Integer.parseInt(valueField.getText());
+            if(tree.search(tree.getRoot(),key) == null)
+                System.out.println("Node " + key + " is not in the AVL!");
+            else {
+                pane.getChildren().remove(avlPane);
+                displayTreeHeight(key);
+                pane.getChildren().add(avlPane);
+            }
+            valueField.setText("");
+        }
+    }
 
+    @FXML
+    void depthButton(ActionEvent event)  {
+        if (valueField.getText().length() == 0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to get depth!", ButtonType.OK);
+            alert.getDialogPane().setMinHeight(80);
+            alert.show();
+        } else {
+            int key = Integer.parseInt(valueField.getText());
+            if(tree.search(tree.getRoot(),key) == null)
+                System.out.println("Node " + key + " is not in the AVL!");
+            else {
+                pane.getChildren().remove(avlPane);
+                displayTreeDepth(key);
+                pane.getChildren().add(avlPane);
+            }
+            valueField.setText("");
+        }
+    }
+
+    @FXML
+    void backButton(ActionEvent event) throws IOException {
+        tree = null;
+        nodes = null;
+        root = FXMLLoader.load(getClass().getResource("logInScene.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    private void displayTree(){
+        avlPane.getChildren().clear();
+        if(tree.getRoot() != null){
+            displayTree(tree.getRoot(), avlPane.getWidth() / 2, vGap, avlPane.getWidth() / 4, Color.web("#0e264f"));
+        }
+    }
+
+    private void displayTreeSearch(Integer target){
+        avlPane.getChildren().clear();
+        if(tree.getRoot() != null){
+            displayTreeSearch(tree.getRoot(), avlPane.getWidth() / 2, vGap, avlPane.getWidth() / 4, Color.web("#0e264f"), target);
+        }
+    }
+
+    private void displayTreeHeight(Integer target){
+        avlPane.getChildren().clear();
+        if(tree.getRoot() != null){
+            displayTreeHeight(tree.getRoot(), avlPane.getWidth() / 2, vGap, avlPane.getWidth() / 4, Color.web("#0e264f"), target);
+        }
+    }
+
+    private void displayTreeDepth(Integer target){
+        avlPane.getChildren().clear();
+        if(tree.getRoot() != null){
+            displayTreeDepth(tree.getRoot(), avlPane.getWidth() / 2, vGap, avlPane.getWidth() / 4, Color.web("#0e264f"), target);
+        }
+    }
+
+
+    private void displayTree(AvlNode<Integer> root, double x, double y, double hGap, Color color) {
+        if (root.getLeft() != null) {
+            avlPane.getChildren().add(new Line(x - hGap, y + vGap, x, y));
+            displayTree(root.getLeft(), x - hGap, y + vGap, hGap / 2, color);
+        }
+
+        if (root.getRight() != null) {
+            avlPane.getChildren().add(new Line(x + hGap, y + vGap, x, y));
+            displayTree(root.getRight(), x + hGap, y + vGap, hGap / 2, color);
+        }
+
+        Circle circle = new Circle(x, y, radius);
+        circle.setFill(color);
+        Text t = new Text(x - 5, y + 4, root.value + "");
+        t.setFill(Color.WHITE);
+        avlPane.getChildren().addAll(circle, t);
+    }
+
+
+    private void displayTreeSearch(AvlNode<Integer> root, double x, double y, double hGap, Color color, Integer target) {
+        if (root.getLeft() != null) {
+            avlPane.getChildren().add(new Line(x - hGap, y + vGap, x, y));
+            displayTreeSearch(root.getLeft(), x - hGap, y + vGap, hGap / 2, color,target);
+        }
+
+        if (root.getRight() != null) {
+            avlPane.getChildren().add(new Line(x + hGap, y + vGap, x, y));
+            displayTreeSearch(root.getRight(), x + hGap, y + vGap, hGap / 2, color,target);
+        }
+
+        Circle circle = new Circle(x, y, radius);
+        circle.setFill(color);
+        if(root.getValue().compareTo(target) == 0){
+            circle.setFill(Color.RED);
+        }
+        Text t = new Text(x - 5, y + 4, root.value + "");
+        t.setFill(Color.WHITE);
+        avlPane.getChildren().addAll(circle, t);
+    }
+
+
+    private void displayTreeHeight(AvlNode<Integer> root, double x, double y, double hGap, Color color, Integer target) {
+        if (root.getLeft() != null) {
+            avlPane.getChildren().add(new Line(x - hGap, y + vGap, x, y));
+            displayTreeHeight(root.getLeft(), x - hGap, y + vGap, hGap / 2, color,target);
+        }
+
+        if (root.getRight() != null) {
+            avlPane.getChildren().add(new Line(x + hGap, y + vGap, x, y));
+            displayTreeHeight(root.getRight(), x + hGap, y + vGap, hGap / 2, color,target);
+        }
+
+        Circle circle = new Circle(x, y, radius);
+        circle.setFill(color);
+        if(root.getValue().compareTo(target) == 0){
+            circle.setFill(Color.GREEN);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Height of highlighted node is:  " + root.getHeight() , ButtonType.OK);
+            alert.getDialogPane().setMinHeight(80);
+            alert.show();
+        }
+        Text t = new Text(x - 5, y + 4, root.value + "");
+        t.setFill(Color.WHITE);
+        avlPane.getChildren().addAll(circle, t);
+    }
+
+    private void displayTreeDepth(AvlNode<Integer> root, double x, double y, double hGap, Color color, Integer target) {
+        if (root.getLeft() != null) {
+            avlPane.getChildren().add(new Line(x - hGap, y + vGap, x, y));
+            displayTreeDepth(root.getLeft(), x - hGap, y + vGap, hGap / 2, color,target);
+        }
+
+        if (root.getRight() != null) {
+            avlPane.getChildren().add(new Line(x + hGap, y + vGap, x, y));
+            displayTreeDepth(root.getRight(), x + hGap, y + vGap, hGap / 2, color,target);
+        }
+
+        Circle circle = new Circle(x, y, radius);
+        circle.setFill(color);
+        if(root.getValue().compareTo(target) == 0){
+            circle.setFill(Color.BLUE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Depth of highlighted node is:  " + tree.findDepth(tree.getRoot(), target) , ButtonType.OK);
+            alert.getDialogPane().setMinHeight(80);
+            alert.show();
+        }
+        Text t = new Text(x - 5, y + 4, root.value + "");
+        t.setFill(Color.WHITE);
+        avlPane.getChildren().addAll(circle, t);
+    }
 
 }
 
