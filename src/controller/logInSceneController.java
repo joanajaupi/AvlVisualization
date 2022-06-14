@@ -1,13 +1,15 @@
-package application;
+package controller;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 
-import avlimplementation.AVL;
-import avlimplementation.AvlNode;
+import application.Main;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import model.AVL;
+import model.AvlNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -25,8 +27,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
-import javax.swing.text.html.ImageView;
-
 public class logInSceneController {
     private Stage stage;
     private Scene scene;
@@ -36,9 +36,6 @@ public class logInSceneController {
     private Button about;
 
     @FXML
-    private Button getStarted;
-
-    @FXML
     private Button howToUse;
 
     //avlScene buttons
@@ -46,34 +43,13 @@ public class logInSceneController {
     private TextField valueField;
     @FXML
     public Label label;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private Button searchButton;
-    @FXML
-    private Button heightButton;
-    @FXML
-    private Button depthButton;
-    @FXML
-    private Button inButton;
-    @FXML
-    private Button preButton;
-    @FXML
-    private Button postButton;
-    @FXML
-    private Button backButton;
 
-
-    //Avltree
     private AVL<Integer> tree = new AVL<>();
-    //private avlPane view = new avlPane(tree);
     private ArrayList<Integer> nodes = new ArrayList<>();
     @FXML
-    Pane avlPane = new Pane();
+    public Pane avlPane = new Pane();
     @FXML
-    Pane pane;
+    public Pane pane;
     private double radius = 17;
     private double vGap = 50;
 
@@ -116,7 +92,6 @@ public class logInSceneController {
         stage.show();
     }
 
-
     @FXML
     Hyperlink jon;
     @FXML
@@ -142,13 +117,17 @@ public class logInSceneController {
         label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to insert!", ButtonType.OK);
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image(Main.class.getResourceAsStream("images/Design.png")));
             alert.getDialogPane().setMinHeight(80);
+            alert.setTitle("PROMPT");
+            alert.setHeaderText("Insertion");
             alert.show();
         }
         else {
             int key = Integer.parseInt(valueField.getText());
             if(tree.search(tree.getRoot(),key) != null) {
-                label.setText("No duplicate vertex allowed!");
+                label.setText("No duplicate node allowed!");
                 label.setTextFill(Color.RED);
                 label.setVisible(true);
             }
@@ -171,7 +150,11 @@ public class logInSceneController {
         label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to delete!", ButtonType.OK);
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image(Main.class.getResourceAsStream("images/Design.png")));
             alert.getDialogPane().setMinHeight(80);
+            alert.setTitle("PROMPT");
+            alert.setHeaderText("Deletion");
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
@@ -199,7 +182,11 @@ public class logInSceneController {
         label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to search!", ButtonType.OK);
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image(Main.class.getResourceAsStream("images/Design.png")));
             alert.getDialogPane().setMinHeight(80);
+            alert.setTitle("PROMPT");
+            alert.setHeaderText("Searching");
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
@@ -226,7 +213,11 @@ public class logInSceneController {
         label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to get height!", ButtonType.OK);
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image(Main.class.getResourceAsStream("images/Design.png")));
             alert.getDialogPane().setMinHeight(80);
+            alert.setHeaderText("Height");
+            alert.setTitle("PROMPT");
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
@@ -249,7 +240,11 @@ public class logInSceneController {
         label.setVisible(false);
         if (valueField.getText().length() == 0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "You haven't entered node you wish to get depth!", ButtonType.OK);
+            Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+            alertStage.getIcons().add(new Image(Main.class.getResourceAsStream("images/Design.png")));
             alert.getDialogPane().setMinHeight(80);
+            alert.setTitle("PROMPT");
+            alert.setHeaderText("Depth");
             alert.show();
         } else {
             int key = Integer.parseInt(valueField.getText());
@@ -388,9 +383,6 @@ public class logInSceneController {
         if(root.getValue().compareTo(target) == 0){
             circle.setFill(Color.BLUE);
             alertShow("Depth of highlighted node is: ",Integer.toString(tree.findDepth(tree.getRoot(), target)));
-            /*Alert alert = new Alert(Alert.AlertType.INFORMATION, "Depth of highlighted node is:  " + tree.findDepth(tree.getRoot(), target) , ButtonType.OK);
-            alert.getDialogPane().setMinHeight(80);
-            alert.show();*/
         }
         Text t = new Text(x - 5, y + 4, root.value + "");
         t.setFill(Color.WHITE);
@@ -404,7 +396,10 @@ public class logInSceneController {
             alert = new Alert(Alert.AlertType.INFORMATION, "Tree is Empty!", ButtonType.OK);
         else
             alert = new Alert(Alert.AlertType.INFORMATION, type + message, ButtonType.OK);
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image(Main.class.getResourceAsStream("images/Design.png")));
         alert.getDialogPane().setMinHeight(80);
+        alert.setHeaderText("Tree Traversal");
         alert.setTitle("PROMPT");
         alert.show();
     }

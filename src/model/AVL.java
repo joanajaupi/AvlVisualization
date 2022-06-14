@@ -1,4 +1,4 @@
-package avlimplementation;
+package model;
 
 public class AVL<T extends Comparable<T>> {
     private AvlNode<T> root;

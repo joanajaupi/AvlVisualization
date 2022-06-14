@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="416.0" style="-fx-background-color: #0e264f;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.logInSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="416.0" style="-fx-background-color: #0e264f;" stylesheets="@../application/application.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.logInSceneController">
    <children>
       <Label layoutX="84.0" layoutY="212.0" prefHeight="71.0" prefWidth="274.0" text="AVL VISUALISER" textFill="#9ba7ff">
          <font>
@@ -29,7 +29,7 @@
       </Button>
       <ImageView fitHeight="190.0" fitWidth="239.0" layoutX="119.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Design.png" />
+            <Image url="@../application/images/Design.png" />
          </image>
       </ImageView>
    </children>

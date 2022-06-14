@@ -1,1 +1,15 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.buttons {
+    -fx-background-color : #5a76a6;
+}
+.buttons:hover{
+    -fx-background-color: #485F85;
+}
+
+.back {
+    -fx-background-color:  #ba1717;
+}
+
+.back:hover{
+    -fx-background-color: #7B0000;
+}

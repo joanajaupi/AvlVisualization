@@ -1,4 +1,4 @@
-package avlimplementation;
+package model;
 
 public class AvlNode<T extends Comparable<T>> {
     private int height = 0; // by convention leaves have height 0
